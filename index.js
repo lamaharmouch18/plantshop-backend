@@ -11,6 +11,7 @@ app.use(bodyParser.json());
 /* ===============================
    MySQL CONNECTION POOL (FIXED)
    =============================== */
+  
 const db = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -21,7 +22,7 @@ const db = mysql.createPool({
   connectionLimit: 10,
   queueLimit: 0,
   ssl: {
-    rejectUnauthorized: true
+    rejectUnauthorized: false
   }
 });
 
