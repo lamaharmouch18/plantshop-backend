@@ -9,14 +9,21 @@ app.use(cors());
 app.use(bodyParser.json());
 
 const db = mysql.createConnection({
-  host: "localhost",     // Change if needed
-  user: "root",          // Change if needed
-  password: "",          // Change if needed
-  database: "plantshop_db",
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME,
+  port: process.env.DB_PORT,
+  ssl: {
+    rejectUnauthorized: true
+  }
 });
 
 db.connect((err) => {
-  if (err) throw err;
+  if (err) {
+    console.error("MySQL connection failed:", err.message);
+    return;
+  }
   console.log("MySQL connected successfully");
 });
 
